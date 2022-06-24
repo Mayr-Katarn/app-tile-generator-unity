@@ -315,8 +315,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7616451145983590123, guid: 44bc1391ee2328d4b92e04ea47d069fc, type: 3}
       propertyPath: _columns
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7616451145983590123, guid: 44bc1391ee2328d4b92e04ea47d069fc, type: 3}
+      propertyPath: _tileGeneratorPoint
+      value: 
+      objectReference: {fileID: 1953181048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bc1391ee2328d4b92e04ea47d069fc, type: 3}
 --- !u!1 &963194225
@@ -675,6 +679,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3455199732976497822, guid: e2fa5250ef47a914aad902f443b369db, type: 3}
   m_PrefabInstance: {fileID: 1937471162}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1953181048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2249269836522699543, guid: 44bc1391ee2328d4b92e04ea47d069fc, type: 3}
+  m_PrefabInstance: {fileID: 725631245}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2138932109 stripped
 Transform:

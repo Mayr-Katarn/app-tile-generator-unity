@@ -7,39 +7,45 @@ public class TileField : MonoBehaviour
     [SerializeField] private GameObject _tilePrefab, _tileGeneratorPoint;
     [SerializeField] private float _rows, _columns;
 
-    //private Tile[] _tilesArray;
     private Vector3 _tileScaleSize;
-    private TileSize _tileMeterSize;
 
     private void Start()
     {
         _tileScaleSize = _tilePrefab.transform.localScale;
-        _tileMeterSize = _tilePrefab.GetComponent<Tile>().TileSize;
-
-        Debug.Log(_tileScaleSize);
-        Debug.Log(_tileMeterSize);
-        Debug.Log(MetricMeasureConverter.ConvertMillimetersToScale(4000));    
-
-        GenerateField();
     }
 
-    private void GenerateField(float offsetBetweenTiles = 10, float tilesAngle = 0, float rowOffset = 0)
+    private void OnEnable()
     {
+        EventManager.OnGenerateField.AddListener(GenerateField);
+    }
+
+    private void GenerateField(TileProperty tileProperty)
+    {
+        DestroyAllTiles();
+
+        (float offsetBetweenTiles, float tilesAngle, float rowOffset) = tileProperty;
+        Transform transform = _tileGeneratorPoint.GetComponent<Transform>();
+        transform.localEulerAngles = new Vector3(0, 0, tilesAngle);
+
         for (int i = 0; i < _rows; i++)
         {
             for (int j = 0; j < _columns; j++)
             {
                 float offset = MetricMeasureConverter.ConvertMillimetersToScale(offsetBetweenTiles);
-                float x = j * (_tileScaleSize.x + offset);
+                float xRowOffset = MetricMeasureConverter.ConvertMillimetersToScale(i % 2 == 0 ? rowOffset : 0);
+                float x = j * (_tileScaleSize.x + offset) + xRowOffset;
                 float y = i * (_tileScaleSize.y + offset);
 
-                GameObject tile = Instantiate(_tilePrefab, _tileGeneratorPoint.GetComponent<Transform>());
+                GameObject tile = Instantiate(_tilePrefab, transform);
                 tile.transform.localPosition = new Vector2(x, y);
                 tile.GetComponent<Tile>().SetGridPosition(j, i);
-                
             }
         }
+    }
 
-        //GameObject.FindGameObjectsWithTag("Tile");
+    private void DestroyAllTiles()
+    {
+        Tile[] tiles = FindObjectsOfType<Tile>();
+        foreach (Tile tile in tiles) tile.Destroy();
     }
 }

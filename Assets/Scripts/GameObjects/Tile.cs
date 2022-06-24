@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour, ITile
 {
-    public int row;
-    public int col;
+    public int row, col;
+
     public TileSize TileSize
     {
         get
@@ -24,5 +24,10 @@ public class Tile : MonoBehaviour, ITile
     {
         this.row = row;
         this.col = col;
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
