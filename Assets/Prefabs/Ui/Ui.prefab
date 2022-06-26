@@ -2499,6 +2499,7 @@ MonoBehaviour:
   _offsetBetweenTilesInput: {fileID: 3587257464614010591}
   _tilesAngleInput: {fileID: 1379879101692516086}
   _rowOffsetInput: {fileID: 4125179446626391264}
+  _resultText: {fileID: 8277144684144046999}
 --- !u!1 &7678895240878482156
 GameObject:
   m_ObjectHideFlags: 0
